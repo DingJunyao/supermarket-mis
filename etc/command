@@ -1,0 +1,17 @@
+git clone https://github.com/lin-xin/vue-manage-system.git
+cd ..
+cd be
+npm init
+package name: (be) supermarket_mis_be
+version: (1.0.0)
+description: The backend server of supermarket MIS
+entry point: (index.js) app.js
+test command:
+git repository:
+keywords:
+author: Ding Junyao
+license: (ISC)
+Is this ok? (yes) yes
+npm install express --save
+npm install express-generator -g
+express be
