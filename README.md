@@ -6,7 +6,7 @@
 
 ## 引用
 
-[lin-xin/vue-manage-system][1]
+前端框架采用 [lin-xin/vue-manage-system][1]
 
 ## 环境
 
@@ -36,6 +36,7 @@ Express（将要安装）版本：
 |- fe                         //前端
 |- be                         //后端
 |- etc                        //存放其他文件，如SQL语句
+|- README.md				  //自述文件
 ```
 
 ---------
@@ -54,7 +55,7 @@ sudo apt-get install nodejs mysql-server
 ```shell
 sudo netstat -tap | grep mysql
 ```
-如果有返回值则表明安装成功。
+如果有关于`mysql`的返回值则表明安装成功。
 
 配置工作目录（包括clone前端框架、安装前端框架依赖、安装Express）
 
