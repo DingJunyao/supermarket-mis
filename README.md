@@ -278,11 +278,12 @@ npm install express-generator -g
 express be
 ```
 
-安装后端依赖（在`supermarket-mis`目录下）
+安装后端依赖（在`supermarket-mis`目录（以下简称程序目录）下）
 
 ```shell
 cd be
 npm install cors --save
+npm install mysql -save
 ```
 
 配置数据库（新建名为`supermarket`的数据库，创建一系列表）
@@ -407,6 +408,12 @@ INSERT INTO `import` VALUES
   ('6917878045122', '00001', '0.90','测试数据'),
   ('6917878045122', '00002', '0.92','测试数据'),
   ('6921734903525', '00002', '10.00','测试数据');
+```
+
+在程序目录的`be/node_modules`下新建文件夹`supermarket-mis`，新建文件`index.js`如下：
+
+```js
+
 ```
 
 ## 参考文献

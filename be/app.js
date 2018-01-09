@@ -8,12 +8,20 @@ var cors = require('cors');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var goods = require('./routes/goods');
+var supplier = require('./routes/supplier');
+var warehouse = require('./routes/warehouse');
+var order = require('./routes/warehouse');
+var wrecord = require('./routes/wrecord');
+var wwarrant = require('./routes/wwarrant');
+var misimport = require('./routes/import');
+var user = require('./routes/user');
 
 var app = express();
 
 app.use(cors({
     origin:['http://localhost:8080'],
-    methods:['GET','POST'],
+    methods:['GET','POST','PATCH','PUT','DELETE'],
     alloweHeaders:['Conten-Type', 'Authorization']
 }));
 
@@ -30,6 +38,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
+app.use('/goods', goods);
+app.use('/supplier', supplier);
+app.use('/warehouse', warehouse);
+app.use('/order', order);
+app.use('/wrecord', wrecord);
+app.use('/wwarrant', wwarrant);
+app.use('/import', misimport);
+app.use('/user', user);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
