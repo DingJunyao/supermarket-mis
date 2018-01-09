@@ -1,10 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var mysql      = require('mysql');
+var mysql = require('mysql');
 var dbconfig = require('../db/dbconfig');
-var usersql = require('../db/usersql');
 var check = require('../utily/check');
-// 使用DBConfig.js的配置信息创建一个MySQL连接池
 var pool = mysql.createPool( dbconfig.mysql );
 
 router.get('/', function(req, res, next) {
@@ -110,6 +108,8 @@ router.get('/gnote/:gnote', function(req, res, next) {
   connection.release();
 });
 });
+
+//TODO: 完成POST、PUT、PATCH、DELETE的接口
 
 router.post('/',function(req,res,next){
   pool.getConnection(function(err, connection) {

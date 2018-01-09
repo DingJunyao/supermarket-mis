@@ -134,9 +134,9 @@ Express（将要安装）版本：
 | 2    | `ogid`    | `VARCHAR`  | `9`  | 否    |      | 订单编号   |
 | 3    | `otime`   | `DATETIME` |      | 否    |      | 生成订单时间 |
 | 4    | `sid`     | `VARCHAR`  | `5`  | 否    | 外键   | 供应商编号  |
-| 6    | `gid`     | `VARCHAR`  | `13` | 否    | 外键   | 商品编号   |
-| 7    | `onumber` | `INT`      | `4`  | 否    |      | 订商品数量  |
-| 8    | `onote`   | `VARCHAR`  | `40` | 是    |      | 备注     |
+| 5    | `gid`     | `VARCHAR`  | `13` | 否    | 外键   | 商品编号   |
+| 6    | `onumber` | `INT`      | `4`  | 否    |      | 订商品数量  |
+| 7    | `onote`   | `VARCHAR`  | `40` | 是    |      | 备注     |
 
 #### `wrecord`表
 
@@ -410,11 +410,152 @@ INSERT INTO `import` VALUES
   ('6921734903525', '00002', '10.00','测试数据');
 ```
 
-在程序目录的`be/node_modules`下新建文件夹`supermarket-mis`，新建文件`index.js`如下：
+在`be`下新建目录`db`，新建文件`dbconfig.js`如下：
 
 ```js
+module.exports =
+{
+   mysql: {
+            host: '127.0.0.1',
+            user: 'root',
+            password: 'root',
+            database:'supermarket',
+            port: 3306
+          }
+ };
+```
+
+新建并编辑`be/routes/goods.js`：
+
+```js
+var express = require('express');
+var router = express.Router();
+var mysql = require('mysql');
+var dbconfig = require('../db/dbconfig');
+var check = require('../utily/check');
+// 使用DBConfig.js的配置信息创建一个MySQL连接池
+var pool = mysql.createPool( dbconfig.mysql );
+
+router.get('/', function(req, res, next) {
+  pool.getConnection(function(err, connection) {
+  connection.query('SELECT * FROM goods', function (error, results, fields) {
+    if (error) throw error;
+    //res.type('json');
+    //res.json(check.checkCode("6901236374382"));
+    res.json(results);
+    //return res.send(JSON.stringify(results))
+  });
+  connection.release();
+  //res.render('index', { title: 'Express' });
+});
+});
+
+router.get('/:gid', function(req, res, next) {
+  pool.getConnection(function(err, connection) {
+  connection.query('SELECT * FROM goods where gid = ?',req.params.gid, function (error, results, fields) {
+    if (error) throw error;
+    res.json(results);
+  });
+  connection.release();
+});
+});
+
+router.get('/gname/:gname', function(req, res, next) {
+  pool.getConnection(function(err, connection) {
+  connection.query('SELECT * FROM goods where gname = ?',req.params.gname, function (error, results, fields) {
+    if (error) throw error;
+    res.json(results);
+  });
+  connection.release();
+});
+});
+
+router.get('/gclass/:gclass', function(req, res, next) {
+  pool.getConnection(function(err, connection) {
+  connection.query('SELECT * FROM goods where gclass = ?',req.params.gclass, function (error, results, fields) {
+    if (error) throw error;
+    res.json(results);
+  });
+  connection.release();
+});
+});
+
+router.get('/gbrand/:gbrand', function(req, res, next) {
+  pool.getConnection(function(err, connection) {
+  connection.query('SELECT * FROM goods where gbrand = ?',req.params.gbrand, function (error, results, fields) {
+    if (error) throw error;
+    res.json(results);
+  });
+  connection.release();
+});
+});
+
+router.get('/gprice/:gprice', function(req, res, next) {
+  pool.getConnection(function(err, connection) {
+  connection.query('SELECT * FROM goods where gprice = ?',req.params.gprice, function (error, results, fields) {
+    if (error) throw error;
+    res.json(results);
+  });
+  connection.release();
+});
+});
+
+router.get('/gunit/:gunit', function(req, res, next) {
+  pool.getConnection(function(err, connection) {
+  connection.query('SELECT * FROM goods where gunit = ?',req.params.gunit, function (error, results, fields) {
+    if (error) throw error;
+    res.json(results);
+  });
+  connection.release();
+});
+});
+
+router.get('/gshelf/:gshelf', function(req, res, next) {
+  pool.getConnection(function(err, connection) {
+  connection.query('SELECT * FROM goods where gshelf = ?',req.params.gshelf, function (error, results, fields) {
+    if (error) throw error;
+    res.json(results);
+  });
+  connection.release();
+});
+});
+
+router.get('/gplace/:gplace', function(req, res, next) {
+  pool.getConnection(function(err, connection) {
+  connection.query('SELECT * FROM goods where gplace = ?',req.params.gplace, function (error, results, fields) {
+    if (error) throw error;
+    res.json(results);
+  });
+  connection.release();
+});
+});
+
+router.get('/gnote/:gnote', function(req, res, next) {
+  pool.getConnection(function(err, connection) {
+  connection.query('SELECT * FROM goods where gnote = ?',req.params.gnote, function (error, results, fields) {
+    if (error) throw error;
+    res.json(results);
+  });
+  connection.release();
+});
+});
+
+//待将来添加内容
+
+module.exports = router;
+```
+在`be`目录下运行`set DEBUG=myapp & npm start`，再打开浏览器，分别测试如下链接：
 
 ```
+http://localhost:3000/goods
+http://localhost:3000/goods/6917878045122
+http://localhost:3000/goods/gname/统一阿萨姆原味奶茶
+...
+```
+
+若访问正常，则goods的GET部分的API已经完成。
+
+参照上面的步骤做出`supplier.js`、`warehouse.js`、`order.js`、`wwarrant.js`、`wrecord.js`、`import.js`。
 
 ## 参考文献
 
