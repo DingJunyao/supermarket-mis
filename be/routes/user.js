@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-// 导入MySQL模块
+
 var mysql = require('mysql');
 var dbconfig = require('../db/dbconfig');
 var usersql = require('../db/usersql');
@@ -21,7 +21,7 @@ pool.getConnection(function(err, connection) {
 // 获取前台页面传过来的参数
  var param = req.query || req.params;
 // 建立连接 增加一个用户信息
-connection.query(userSQL.insert, [param.uid,param.name], function(err, result) {
+connection.query(usersql.insert, [param.uid,param.name], function(err, result) {
         if(result) {
              result = {
                       code: 200,
