@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+
 var goods = require('./routes/goods');
 var supplier = require('./routes/supplier');
 var warehouse = require('./routes/warehouse');
@@ -46,7 +46,7 @@ app.use('/wrecord', wrecord);
 app.use('/wwarrant', wwarrant);
 app.use('/import', misimport);
 app.use('/user', user);
-app.use('/users', users);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -12,9 +12,11 @@
 
 ### 硬件环境
 
-CPU：AMD A10-7400P Radeon R6, 10 Compute Cores 4C+6G @ 4x 2.5GHz
+CPU: AMD A10-7400P Radeon R6, 10 Compute s 4C+6G (4) @ 2.500GHz
 
-GPU: AMD/ATI Kaveri [Radeon R6 Graphics]
+GPU: AMD Radeon R6 Graphics
+
+GPU: AMD Radeon R9 M270X
 
 RAM: 2890MiB / 6915MiB
 
