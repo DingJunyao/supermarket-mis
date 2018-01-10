@@ -1,4 +1,4 @@
-# 小型超市管理信息系统
+# 小型超市采购管理信息系统
 
 本仓库为我们团队的课设的代码存放处。
 
@@ -10,33 +10,58 @@
 
 ## 环境
 
-### 硬件环境
+### 软硬件环境
 
-CPU: AMD A10-7400P Radeon R6, 10 Compute s 4C+6G (4) @ 2.500GHz
+#### 客户端环境
 
-GPU: AMD Radeon R6 Graphics
+本系统为B/S架构，对于客户端的要求主要体现在浏览器上。
 
-GPU: AMD Radeon R9 M270X
+由于使用了Vue.js，对浏览器的要求为兼容ECMAScript 5。各大浏览器内核可兼容此的最低版本为：
 
-RAM: 2890MiB / 6915MiB
+- IE 10
+- Edge 12
+- Firefox 21
+- Chrome 23
+- Safari 6
+- iOS Safari 6.1
+- Opera Mini （部分支持）
+- Chrome for Android 62
+- UC浏览器 （Android） 11.4
+- Samsung Internet 4
 
-### 软件环境
+#### 服务端环境
+
+本系统的服务端可以在开发环境上完美运行，并建议使用Linux作为服务器。由于规模较小，对于硬件的要求不高。
+
+开发环境为：
+
+##### 硬件环境
+
+CPU：AMD A10-7400P Radeon R6, 10Compute s 4C+6G (4) @ 2.500GHz
+
+GPU：AMD Radeon R6 Graphics & AMDRadeon R9 M270X
+
+RAM：2890MiB / 6915MiB
+
+##### 软件环境
 
 系统：Deepin 15.5 unstable
 
 内核：x86_64 Linux 4.9.0-deepin13-amd64
 
-node.js（将要安装）版本：v6.3.1
+node.js版本：v6.3.1
 
-MySQL（将要安装）版本：5.7.18-1
+MySQL版本：5.7.18-1
 
-Express（将要安装）版本：
+Express版本：4.0
 
 ## 结构
 
 ```
 |- fe                         //前端
+   |- vue-manage-system       //详细情况见原项目自述文件
 |- be                         //后端
+   |- 
 |- etc                        //存放其他文件，如SQL语句
 |- README.md				  //自述文件
 ```
@@ -142,39 +167,39 @@ Express（将要安装）版本：
 
 #### `wrecord`表
 
-| 序号   | 字段名     | 字段类型     | 长度   | 允许为空 | 约束条件 | 备注          |
-| ---- | ------- | -------- | ---- | ---- | ---- | ----------- |
-| 1    | `rid`   | `VARCHAR`  | `12`   | 否    | 主键   | 出入库单单条编号    |
-| 2    | `rgid`  | `VARCHAR`  | `9`    | 否    |      | 出入库单编号      |
-| 3    | `rtype`   | `INT`      | `1`    | 否    |      | 类型（`1`入`0`出）    |
-| 4    | `hid`     | `VARCHAR`  | `2`    | 否    | 外键   | 仓库编号        |
-| 5    | `gid`     | `VARCHAR`  | `13`   | 否    | 外键   | 商品编号        |
-| 6    | `rtime`   | `DATETIME` |      | 否    |      | 出入库时间       |
-| 7    | `rnumber` | `INT`      | `4`    | 否    |      | 出入库数量（正入负出） |
-| 8    | `rnote`   | `VARCHAR`  | `40`   | 是    |      | 备注          |
+| 序号   | 字段名       | 字段类型       | 长度   | 允许为空 | 约束条件 | 备注           |
+| ---- | --------- | ---------- | ---- | ---- | ---- | ------------ |
+| 1    | `rid`     | `VARCHAR`  | `12` | 否    | 主键   | 出入库单单条编号     |
+| 2    | `rgid`    | `VARCHAR`  | `9`  | 否    |      | 出入库单编号       |
+| 3    | `rtype`   | `INT`      | `1`  | 否    |      | 类型（`1`入`0`出） |
+| 4    | `hid`     | `VARCHAR`  | `2`  | 否    | 外键   | 仓库编号         |
+| 5    | `gid`     | `VARCHAR`  | `13` | 否    | 外键   | 商品编号         |
+| 6    | `rtime`   | `DATETIME` |      | 否    |      | 出入库时间        |
+| 7    | `rnumber` | `INT`      | `4`  | 否    |      | 出入库数量（正入负出）  |
+| 8    | `rnote`   | `VARCHAR`  | `40` | 是    |      | 备注           |
 
 #### `wwarrant`表
 
-| 序号   | 字段名     | 字段类型    | 长度   | 允许为空 | 约束条件  | 备注       |
-| ---- | ------- | ------- | ---- | ---- | ----- | -------- |
-| 1    | `gid`     | `VARCHAR` | `13`   | 否    | 主键，外键 | 商品条码     |
-| 2    | `hid`     | `VARCHAR` | `2`    | 否    | 主键，外键 | 商品所在仓库编号 |
-| 3    | `wnumber` | `DECIMAL` | `7,3`  | 否    |       | 商品数量     |
-| 4    | `wnote`   | `VARCHAR` | `40`   | 是    |       | 备注       |
+| 序号   | 字段名       | 字段类型      | 长度    | 允许为空 | 约束条件  | 备注       |
+| ---- | --------- | --------- | ----- | ---- | ----- | -------- |
+| 1    | `gid`     | `VARCHAR` | `13`  | 否    | 主键，外键 | 商品条码     |
+| 2    | `hid`     | `VARCHAR` | `2`   | 否    | 主键，外键 | 商品所在仓库编号 |
+| 3    | `wnumber` | `DECIMAL` | `7,3` | 否    |       | 商品数量     |
+| 4    | `wnote`   | `VARCHAR` | `40`  | 是    |       | 备注       |
 
 #### `import`表
 
-| 序号   | 字段名    | 字段类型    | 长度   | 允许为空 | 约束条件  | 备注    |
-| ---- | ------ | ------- | ---- | ---- | ----- | ----- |
-| 1    | `gid`    | `VARCHAR` | `13`   | 否    | 主键，外键 | 商品条码  |
-| 2    | `sid`    | `VARCHAR` | `5`    | 否    | 主键，外键 | 供应商编号 |
-| 3    | `iprice` | `DECIMAL` | `6,2`  | 否    |       | 进价    |
-| 4    | `inote`  | `VARCHAR` | `40`   | 是    |       | 备注    |
+| 序号   | 字段名      | 字段类型      | 长度    | 允许为空 | 约束条件  | 备注    |
+| ---- | -------- | --------- | ----- | ---- | ----- | ----- |
+| 1    | `gid`    | `VARCHAR` | `13`  | 否    | 主键，外键 | 商品条码  |
+| 2    | `sid`    | `VARCHAR` | `5`   | 否    | 主键，外键 | 供应商编号 |
+| 3    | `iprice` | `DECIMAL` | `6,2` | 否    |       | 进价    |
+| 4    | `inote`  | `VARCHAR` | `40`  | 是    |       | 备注    |
 
 #### `user`表
 
-| 序号   | 字段名   | 字段类型    | 长度   | 允许为空 | 约束条件 | 备注     |
-| ---- | ----- | ------- | ---- | ---- | ---- | ------ |
+| 序号   | 字段名     | 字段类型      | 长度   | 允许为空 | 约束条件 | 备注     |
+| ---- | ------- | --------- | ---- | ---- | ---- | ------ |
 | 1    | `uid`   | `VARCHAR` | 15   | 否    | 主键   | 工号     |
 | 2    | `uhash` | `VARCHAR` | 64   | 否    |      | 密码的加密值 |
 | 3    | `uname` | `VARCHAR` | 20   | 否    |      | 姓名     |
@@ -248,16 +273,179 @@ eg.
 
 ---------
 
-## 过程
+## 使用说明
 
-安装node.js MySQL
+### 服务端的安装与配置
+
+#### Linux（推荐）
+
+安装node.js、npm和MySQL（不同发行版的Linux的软件包仓库不同，请以自己的发行版的为准）：
 
 ```shell
-sudo apt-get install nodejs mysql-server
+sudo apt-get install nodejs npm mysql-server
 ```
-在安装MySQL中设置root的密码`root`
 
-检查MySQL是否安装成功
+在安装MySQL中设置root的密码`root`；检查MySQL是否安装成功：
+
+```shell
+sudo netstat -tap | grep mysql
+```
+
+如果有关于`mysql`的返回值则表明安装成功。
+
+复制程序目录到某一地点，或执行以下命令从GitHub上下载本代码：
+
+```shell
+git clone https://github.com/DingJunyao/supermarket-mis.git
+```
+
+安装依赖：
+
+```shell
+cd supermarket-mis/fe
+npm install
+cd ../be
+npm install
+```
+
+配置数据库：
+
+```shell
+mysql -h localhost -u root -p
+```
+
+```sql
+SET NAMES utf8;
+CREATE DATABASE supermarket;
+USE supermarket;
+
+CREATE TABLE `goods`(
+    `gid` VARCHAR(13) NOT NULL,
+    `gname` VARCHAR(30) NOT NULL,
+    `gclass` VARCHAR(20) NOT NULL,
+    `gbrand` VARCHAR(20),
+    `gprice` DECIMAL(6,2) NOT NULL,
+    `gunit` VARCHAR(8) NOT NULL,
+    `gshelf` INT(4),
+    `gplace` VARCHAR(30),
+    `gnote` VARCHAR(40),
+    PRIMARY KEY (`gid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `supplier`(
+    `sid` VARCHAR(5) NOT NULL,
+    `sname` VARCHAR(20) NOT NULL,
+    `sphone` VARCHAR(15) NOT NULL,
+    `saddress` VARCHAR(40) NOT NULL,
+    `snote` VARCHAR(40),
+    PRIMARY KEY (`sid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `warehouse`(
+    `hid` VARCHAR(2) NOT NULL,
+    `hname` VARCHAR(20) NOT NULL,
+    `hnote` VARCHAR(40),
+    PRIMARY KEY (`hid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `order`(
+    `oid` VARCHAR(12) NOT NULL,
+    `ogid` VARCHAR(9) NOT NULL,
+    `otime` DATETIME NOT NULL,
+    `sid` VARCHAR(5) NOT NULL,
+    `gid` VARCHAR(13) NOT NULL,
+    `onumber` INT(4) NOT NULL,
+    `onote` VARCHAR(40),
+    PRIMARY KEY (`oid`),
+    CONSTRAINT o_gid_fk FOREIGN KEY (`gid`) REFERENCES goods(`gid`),
+    CONSTRAINT o_sid_fk FOREIGN KEY (`sid`) REFERENCES supplier(`sid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `wrecord`(
+    `rid` VARCHAR(12) NOT NULL,
+    `rgid` VARCHAR(9) NOT NULL,
+    `rtype` INT(1) NOT NULL,
+    `hid` VARCHAR(2) NOT NULL,
+    `gid` VARCHAR(13) NOT NULL,
+    `rtime` DATETIME NOT NULL,
+    `rnumber` INT(4) NOT NULL,
+    `rnote` VARCHAR(40),
+    PRIMARY KEY (`rid`),
+    constraint r_gid_fk foreign key (`gid`) references goods(`gid`),
+    constraint r_hid_fk foreign key (`hid`) references warehouse(`hid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `wwarrant`(
+    `gid` VARCHAR(13) NOT NULL,
+    `hid` VARCHAR(2) NOT NULL,
+    `wnumber` DECIMAL(7,3) NOT NULL,
+    `wnote` VARCHAR(40),
+    PRIMARY KEY (`gid`,`hid`),
+    constraint w_gid_fk foreign key (`gid`) references goods(`gid`),
+    constraint w_hid_fk foreign key (`hid`) references warehouse(`hid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `import`(
+    `gid` VARCHAR(13) NOT NULL,
+    `sid` VARCHAR(5) NOT NULL,
+    `iprice` DECIMAL(6,2) NOT NULL,
+    `inote` VARCHAR(40),
+    PRIMARY KEY (`gid`,`sid`),
+    constraint i_gid_fk foreign key (`gid`) references goods(`gid`),
+    constraint i_sid_fk foreign key (`sid`) references supplier(`sid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `user`(
+    `uid` VARCHAR(15) NOT NULL,
+    `uhash` VARCHAR(64) NOT NULL,
+    `uname` VARCHAR(20) NOT NULL,
+    `utype` INT(2) NOT NULL,
+    PRIMARY KEY (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+```
+
+执行`show tables;`，如果看到8张表，则创建成功。
+
+新开一终端窗口或控制台界面，定位至`be`目录下，执行下面的命令启动后端服务器，不得关闭。
+
+```shell
+DEBUG=myapp npm start
+```
+
+新开一终端窗口或控制台界面，定位至`fe/vue-manage-system`目录下，执行下面的命令启动前端服务器，不得关闭。
+
+```shell
+npm run dev
+```
+
+如果需要关闭，在界面中按`Ctrl`+`C`。
+
+#### Windows
+
+确保已安装node.js、npm和MySQL，并配置正确。
+
+上述命令仍然适用，但需要修改：
+
+1. 涉及到目录分隔的`/`改为`\`
+
+2. 启动后端服务器的命令如下：
+
+   ```powershell
+   set DEBUG=myapp & npm start
+   ```
+
+### 查看
+
+## 过程
+
+安装node.js、npm和MySQL：
+
+```shell
+sudo apt-get install nodejs npm mysql-server
+```
+在安装MySQL中设置root的密码`root`：
+
+检查MySQL是否安装成功：
 
 ```shell
 sudo netstat -tap | grep mysql
@@ -546,7 +734,7 @@ router.get('/gnote/:gnote', function(req, res, next) {
 
 module.exports = router;
 ```
-在`be`目录下运行`set DEBUG=myapp & npm start`，再打开浏览器，分别测试如下链接：
+在`be`目录下运行`set DEBUG=be & npm start`，再打开浏览器，分别测试如下链接：
 
 ```
 http://localhost:3000/goods
