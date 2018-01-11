@@ -11,6 +11,9 @@ module.exports = {
       c2 += Number(code.charAt(i))
     }
     c3 = 10-(c1*3+c2)%10;
+    if(c3==10){
+      c3=0;
+    }
     if(c3==checkMark){
       console.log("检验数正确");
       return -1;
@@ -30,6 +33,9 @@ module.exports = {
       c2 += Number(code.charAt(i))
     }
     c3 = 10-(c1*3+c2)%10;
+    if(c3==10){
+      c3=0;
+    }
     console.log("检验数:" + c3);
     return c3;
   }

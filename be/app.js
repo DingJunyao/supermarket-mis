@@ -11,11 +11,12 @@ var index = require('./routes/index');
 var goods = require('./routes/goods');
 var supplier = require('./routes/supplier');
 var warehouse = require('./routes/warehouse');
-var order = require('./routes/warehouse');
+var order = require('./routes/order');
 var wrecord = require('./routes/wrecord');
 var wwarrant = require('./routes/wwarrant');
 var misimport = require('./routes/import');
 var user = require('./routes/user');
+var goodsMenu = require('./routes/goodsMenu');
 
 var app = express();
 
@@ -46,6 +47,7 @@ app.use('/wrecord', wrecord);
 app.use('/wwarrant', wwarrant);
 app.use('/import', misimport);
 app.use('/user', user);
+app.use('/goodsMenu', goodsMenu);
 
 
 // catch 404 and forward to error handler

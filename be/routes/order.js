@@ -7,7 +7,7 @@ var pool = mysql.createPool( dbconfig.mysql );
 
 router.get('/', function(req, res, next) {
   pool.getConnection(function(err, connection) {
-  connection.query('SELECT * FROM order', function (error, results, fields) {
+  connection.query('SELECT * FROM `order`', function (error, results, fields) {
     if (error) throw error;
     res.json(results);
   });
@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/:oid', function(req, res, next) {
   pool.getConnection(function(err, connection) {
-  connection.query('SELECT * FROM order where oid = ?',req.params.oid, function (error, results, fields) {
+  connection.query('SELECT * FROM `order` where oid = ?',req.params.oid, function (error, results, fields) {
     if (error) throw error;
     res.json(results);
   });
@@ -27,7 +27,7 @@ router.get('/:oid', function(req, res, next) {
 
 router.get('/ogid/:ogid', function(req, res, next) {
   pool.getConnection(function(err, connection) {
-  connection.query('SELECT * FROM order where ogid = ?',req.params.ogid, function (error, results, fields) {
+  connection.query('SELECT * FROM `order` where ogid = ?',req.params.ogid, function (error, results, fields) {
     if (error) throw error;
     res.json(results);
   });
@@ -37,7 +37,7 @@ router.get('/ogid/:ogid', function(req, res, next) {
 
 router.get('/otime/:otime', function(req, res, next) {
   pool.getConnection(function(err, connection) {
-  connection.query('SELECT * FROM order where otime = ?',req.params.otime, function (error, results, fields) {
+  connection.query('SELECT * FROM `order` where otime = ?',req.params.otime, function (error, results, fields) {
     if (error) throw error;
     res.json(results);
   });
@@ -47,7 +47,7 @@ router.get('/otime/:otime', function(req, res, next) {
 
 router.get('/sid/:sid', function(req, res, next) {
   pool.getConnection(function(err, connection) {
-  connection.query('SELECT * FROM order where sid = ?',req.params.sid, function (error, results, fields) {
+  connection.query('SELECT * FROM `order` where sid = ?',req.params.sid, function (error, results, fields) {
     if (error) throw error;
     res.json(results);
   });
@@ -57,7 +57,7 @@ router.get('/sid/:sid', function(req, res, next) {
 
 router.get('/gid/:gid', function(req, res, next) {
   pool.getConnection(function(err, connection) {
-  connection.query('SELECT * FROM order where gid = ?',req.params.gid, function (error, results, fields) {
+  connection.query('SELECT * FROM `order` where gid = ?',req.params.gid, function (error, results, fields) {
     if (error) throw error;
     res.json(results);
   });
@@ -67,7 +67,7 @@ router.get('/gid/:gid', function(req, res, next) {
 
 router.get('/onumber/:onumber', function(req, res, next) {
   pool.getConnection(function(err, connection) {
-  connection.query('SELECT * FROM order where onumber = ?',req.params.onumber, function (error, results, fields) {
+  connection.query('SELECT * FROM `order` where onumber = ?',req.params.onumber, function (error, results, fields) {
     if (error) throw error;
     res.json(results);
   });
@@ -77,7 +77,7 @@ router.get('/onumber/:onumber', function(req, res, next) {
 
 router.get('/onote/:onote', function(req, res, next) {
   pool.getConnection(function(err, connection) {
-  connection.query('SELECT * FROM order where onote = ?',req.params.onote, function (error, results, fields) {
+  connection.query('SELECT * FROM `order` where onote = ?',req.params.onote, function (error, results, fields) {
     if (error) throw error;
     res.json(results);
   });
@@ -90,7 +90,7 @@ router.get('/onote/:onote', function(req, res, next) {
 router.post('/',function(req,res,next){
   pool.getConnection(function(err, connection) {
     var param = req.query || req.params;
-    connection.query('INSERT FROM order VALUES(?,?,?,?,?,?,?)',[param.oid,param.ogid,param.otime,param.sid,param.gid,param.onumber,param.onote], function (error, results, fields) {
+    connection.query('INSERT FROM `order` VALUES(?,?,?,?,?,?,?)',[param.oid,param.ogid,param.otime,param.sid,param.gid,param.onumber,param.onote], function (error, results, fields) {
     if (error) throw error;
     if(result) {
          result = {
